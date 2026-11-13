@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AviCarnes La Veleñita</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Pacifico&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* Plan: el letrero del local pasado a pantalla. Madera + blanco con borde fucsia (como el rótulo),
+   verde esmeralda como contraste frente al rosado del cerdo, amarillo para los botones. Un solo tema, a propósito. */
+:root{
+  --magenta:#C2379B; --magenta-deep:#8E1F70; --wood:#CF9E5F; --wood-dark:#A97A3E;
+  --teal:#0C6B5B; --teal-deep:#08453B; --sun:#FFD23F; --cream:#FFF8EC; --ink:#26172A; --muted:#5E4F63;
+  --font-display:"Lilita One","Arial Rounded MT Bold",system-ui,sans-serif;
+  --font-script:"Pacifico","Brush Script MT",cursive;
+  --font-body:"DM Sans",system-ui,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font:400 17px/1.55 var(--font-body)}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:var(--font-display);font-weight:400;text-wrap:balance;line-height:1.05;margin:0}
+:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+.outline{color:#fff;-webkit-text-stroke:7px var(--magenta);paint-order:stroke fill;text-shadow:0 4px 0 var(--magenta-deep);letter-spacing:.01em}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:700 17px/1 var(--font-body);padding:16px 24px;border:3px solid var(--ink);border-radius:999px;text-decoration:none;cursor:pointer;box-shadow:0 5px 0 var(--ink);transition:transform .1s,box-shadow .1s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 7px 0 var(--ink)}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 var(--ink)}
+.btn.sun{background:var(--sun);color:var(--ink)}
+.btn.white{background:#fff;color:var(--magenta-deep)}
+.btn.mag{background:var(--magenta);color:#fff}
+@media (prefers-reduced-motion:reduce){.btn,.btn:hover,.btn:active{transition:none;transform:none}}
+
+/* Madera */
+.wood{background:
+  repeating-linear-gradient(92deg,rgba(94,52,12,.10) 0 2px,transparent 2px 9px),
+  repeating-linear-gradient(88deg,rgba(255,235,190,.16) 0 3px,transparent 3px 17px),
+  linear-gradient(180deg,#D9AC6C,#C48F4E)}
+
+header.top{border-bottom:4px solid var(--ink)}
+.bar{display:flex;align-items:center;gap:16px;padding:12px 0;flex-wrap:wrap}
+.mark{display:flex;align-items:baseline;gap:10px;text-decoration:none}
+.mark b{font:400 30px/1 var(--font-display);}
+.mark span{font:400 22px/1 var(--font-script);color:var(--magenta-deep);background:rgba(255,255,255,.85);padding:3px 10px;border-radius:999px;border:2px solid var(--magenta)}
+.local{margin-left:auto;display:flex;align-items:center;gap:10px}
+.local .tag{background:var(--ink);color:#fff;font:400 18px/1 var(--font-display);padding:8px 12px;border-radius:8px;letter-spacing:.04em}
+.local a.btn{padding:11px 18px;font-size:15px;box-shadow:0 4px 0 var(--ink)}
+@media (max-width:640px){.local .tag{display:none}.local{width:100%}.local a.btn{width:100%}.mark b{font-size:26px}}
+
+/* Hero */
+.hero{padding:44px 0 64px;position:relative}
+.hero .wrap{display:grid;grid-template-columns:1.25fr 1fr;gap:36px;align-items:center}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr}}
+.hero .kicker{display:inline-block;background:var(--ink);color:var(--sun);font:700 13px/1 var(--font-body);letter-spacing:.18em;text-transform:uppercase;padding:9px 13px;border-radius:6px;margin-bottom:18px}
+.hero h1{font-size:clamp(44px,8vw,86px)}
+.hero h1 small{display:block;font:400 clamp(26px,4.4vw,42px)/1.1 var(--font-script);color:#fff;-webkit-text-stroke:0;text-shadow:3px 3px 0 var(--magenta-deep);margin-top:10px}
+.hero p.lead{font-size:20px;font-weight:500;max-width:44ch;margin:22px 0 28px;color:var(--ink)}
+.hero .actions{display:flex;gap:14px;flex-wrap:wrap}
+.paths{display:grid;gap:16px}
+.path{display:block;text-decoration:none;background:var(--teal);color:#fff;border:4px solid var(--ink);border-radius:18px;padding:22px;box-shadow:8px 8px 0 var(--ink);transition:transform .12s}
+.path:hover{transform:translate(-3px,-3px)}
+.path.alt{background:var(--magenta)}
+.path small{display:block;font:700 12px/1 var(--font-body);letter-spacing:.18em;text-transform:uppercase;color:var(--sun);margin-bottom:8px}
+.path h2{font-size:30px;margin-bottom:6px}
+.path p{margin:0;opacity:.95;font-size:16px}
+.path em{display:inline-block;margin-top:12px;font:700 15px/1 var(--font-body);font-style:normal;color:var(--sun);border-bottom:3px solid var(--sun);padding-bottom:3px}
+@media (prefers-reduced-motion:reduce){.path,.path:hover{transition:none;transform:none}}
+
+/* Franja */
+.strip{background:var(--sun);border-block:4px solid var(--ink);overflow:hidden}
+.strip ul{list-style:none;margin:0;padding:14px 20px;display:flex;flex-wrap:wrap;justify-content:center;gap:10px 34px;font:400 20px/1 var(--font-display);text-transform:uppercase;letter-spacing:.04em}
+.strip li::before{content:"★";color:var(--magenta);margin-right:10px}
+
+section.block{padding:64px 0}
+.tt{font-size:clamp(32px,5vw,52px);margin-bottom:10px}
+.sub{color:var(--muted);max-width:58ch;margin:0 0 30px;font-size:18px}
+
+/* Cotizador */
+#cotiza{background:var(--teal);color:#fff;border-bottom:4px solid var(--ink)}
+#cotiza .sub{color:#D4F1EA}
+.tt.light{color:#fff}
+.tt.light em{font-style:normal;color:var(--sun)}
+.builder{display:grid;grid-template-columns:1.5fr 1fr;gap:28px;align-items:start}
+@media (max-width:900px){.builder{grid-template-columns:1fr}}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.tab{font:400 22px/1 var(--font-display);padding:14px 8px;border:4px solid var(--ink);border-radius:14px;background:#fff;color:var(--ink);cursor:pointer;box-shadow:0 4px 0 var(--ink)}
+.tab.on{background:var(--sun)}
+.tab:hover{background:var(--cream)}
+.tab.on:hover{background:var(--sun)}
+.note{background:var(--teal-deep);border:3px dashed var(--sun);color:#fff;border-radius:14px;padding:14px 18px;font-size:16px}
+.note a{color:var(--sun);font-weight:700}
+.hint{margin:0 0 12px;color:#D4F1EA;font-size:15px}
+.group h3.c-cerdo{background:var(--magenta);color:#fff}
+.group h3.c-res{background:#8A3B12;color:#fff}
+.group h3.c-pollo{background:var(--sun);color:var(--ink)}
+.row{display:grid;grid-template-columns:104px 1fr;gap:6px 12px;align-items:start;padding:10px 16px;border-top:2px solid #F0E2CC}
+.group h3+.row{border-top:0}
+@media (max-width:520px){.row{grid-template-columns:1fr}}
+.row .lab{font:700 12px/1.3 var(--font-body);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-top:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:stretch;border:3px solid var(--ink);border-radius:999px;overflow:hidden;background:#fff}
+.chip.on{background:var(--sun)}
+.chip .add{font:700 15px/1 var(--font-body);padding:9px 13px;background:none;border:0;color:var(--ink);cursor:pointer}
+.chip .add:hover{background:var(--cream)}
+.chip.on .add:hover{background:var(--sun)}
+.chip .q{margin-left:6px;color:var(--magenta-deep)}
+.chip .minus{display:none;width:34px;border:0;border-left:3px solid var(--ink);background:var(--magenta);color:#fff;font:700 18px/1 var(--font-body);cursor:pointer}
+.chip.on .minus{display:block}
+.groups{display:grid;gap:18px}
+.group{background:#fff;color:var(--ink);border:4px solid var(--ink);border-radius:16px;overflow:hidden}
+.group h3{background:var(--magenta);color:#fff;font-size:22px;padding:12px 18px;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.group h3 span{font:500 14px/1.2 var(--font-body);opacity:.92}
+.cut{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:center;padding:12px 18px;border-top:2px solid #F0E2CC}
+.group h3+.cut{border-top:0}
+.cut .n{font-weight:700;font-size:18px}
+.cut .d{font-size:14.5px;color:var(--muted)}
+.step{display:flex;align-items:center;gap:6px;grid-column:2;grid-row:1 / span 2}
+.step button{width:44px;height:44px;border:3px solid var(--ink);border-radius:50%;background:var(--sun);color:var(--ink);font:700 22px/1 var(--font-body);cursor:pointer}
+.step button:hover{background:var(--magenta);color:#fff}
+.step output{min-width:64px;text-align:center;font-weight:700;font-variant-numeric:tabular-nums}
+.step output.on{color:var(--magenta-deep)}
+
+.ticket{background:var(--cream);color:var(--ink);border:4px solid var(--ink);border-radius:16px;padding:22px;position:sticky;top:14px;box-shadow:8px 8px 0 var(--sun)}
+@media (max-width:900px){.ticket{position:static}}
+.ticket h3{font-size:26px;color:var(--magenta-deep);margin-bottom:14px}
+.seg{display:grid;grid-template-columns:1fr 1fr;border:3px solid var(--ink);border-radius:999px;overflow:hidden;margin-bottom:16px}
+.seg label{cursor:pointer}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg span{display:block;text-align:center;padding:11px 8px;font-weight:700;font-size:15px}
+.seg input:checked+span{background:var(--magenta);color:#fff}
+.seg input:focus-visible+span{outline:3px solid var(--sun);outline-offset:-3px}
+.ticket ul{list-style:none;margin:0 0 16px;padding:0;min-height:44px;font-size:16px}
+.ticket li{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px dashed #D8C7AA;font-variant-numeric:tabular-nums}
+.ticket li.empty{color:var(--muted);border:0}
+.ticket label.f{display:block;font-weight:700;font-size:14px;margin:0 0 5px}
+.ticket input[type=text],.ticket select{width:100%;font:400 16px var(--font-body);padding:11px 12px;border:3px solid var(--ink);border-radius:10px;background:#fff;color:var(--ink);margin-bottom:14px}
+.ticket .btn{width:100%}
+.ticket .btn[aria-disabled="true"]{opacity:.45;pointer-events:none}
+.ticket small{display:block;margin-top:12px;color:var(--muted);font-size:14px}
+#negocioBox[hidden]{display:none}
+
+/* Cómo funciona */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;counter-reset:s;list-style:none;margin:0;padding:0}
+@media (max-width:860px){.steps{grid-template-columns:1fr}}
+.steps li{background:#fff;border:4px solid var(--ink);border-radius:16px;padding:22px 22px 22px 80px;position:relative;box-shadow:6px 6px 0 var(--magenta)}
+.steps li::before{counter-increment:s;content:counter(s);position:absolute;left:18px;top:18px;width:46px;height:46px;border-radius:50%;background:var(--sun);border:3px solid var(--ink);display:grid;place-items:center;font:400 26px/1 var(--font-display)}
+.steps h3{font-size:22px;color:var(--magenta-deep);margin-bottom:4px}
+.steps p{margin:0;color:var(--muted)}
+
+/* Para quién */
+.who{display:flex;flex-wrap:wrap;gap:12px;margin:0;padding:0;list-style:none}
+.who li{background:var(--magenta);color:#fff;border:3px solid var(--ink);border-radius:999px;padding:10px 18px;font-weight:700}
+.who li:nth-child(even){background:var(--teal)}
+
+footer{background:var(--ink);color:#fff;padding:44px 0;border-top:6px solid var(--magenta)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:24px 48px;justify-content:space-between;align-items:center}
+footer h2{font-size:34px;color:var(--sun)}
+footer p{margin:6px 0 0;color:#E7DCEB}
+footer .big{font:400 40px/1 var(--font-display);color:#fff;background:var(--magenta);display:inline-block;padding:8px 16px;border-radius:10px;margin-top:12px;letter-spacing:.04em}
+footer .btn{box-shadow:0 5px 0 #000}
+</style>
+</head>
+<body>
+
+<header class="top wood">
+  <div class="wrap bar">
+    <a class="mark" href="#inicio" aria-label="AviCarnes La Veleñita, inicio">
+      <b class="outline" style="-webkit-text-stroke-width:5px;text-shadow:0 3px 0 var(--magenta-deep)">AVICARNES</b>
+      <span>la veleñita</span>
+    </a>
+    <div class="local">
+      <span class="tag">LOCAL 086</span>
+      <a class="btn sun" id="waTop" href="#" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
+    </div>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="hero wood">
+    <div class="wrap">
+      <div>
+        <span class="kicker">Cerdo · Res · Pollo · Local 086</span>
+        <h1 class="outline">Carnes frescas<small>cerdo, res y pollo · por mayor y al detal</small></h1>
+        <p class="lead">Cerdo, res y pollo en todos sus cortes, cortados como los necesites. Elige, pide tu cotización por WhatsApp y te llevamos el pedido a domicilio o lo recoges en el Local 086.</p>
+        <div class="actions">
+          <a class="btn sun" href="#cotiza" data-tipo="mayor">Cotizar por mayor</a>
+          <a class="btn white" href="#cotiza" data-tipo="detal">Comprar para mi casa</a>
+        </div>
+      </div>
+      <div class="paths">
+        <a class="path" href="#cotiza" data-tipo="mayor">
+          <small>Restaurantes · tiendas · asaderos</small>
+          <h2>Precio mayorista</h2>
+          <p>Compra por kilos y pide el precio especial para tu negocio.</p>
+          <em>Pedir cotización →</em>
+        </a>
+        <a class="path alt" href="#cotiza" data-tipo="detal">
+          <small>Familias · eventos · parrilladas</small>
+          <h2>Para tu casa</h2>
+          <p>Las libras que necesites, cortadas a tu gusto.</p>
+          <em>Armar mi pedido →</em>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="strip" aria-label="Lo que ofrecemos">
+    <ul><li>Despresado del día</li><li>Corte a tu gusto</li><li>Precio por mayor</li><li>Domicilio</li><li>Atención por WhatsApp</li></ul>
+  </div>
+
+  <section class="block" id="cotiza" style="background:var(--teal);color:#fff">
+    <div class="wrap">
+      <h2 class="tt light">Elige tus cortes y <em>pide tu cotización</em></h2>
+      <p class="sub">Escoge cerdo, res o pollo, marca las cantidades y toca el botón de WhatsApp. Te llega tu pedido ya escrito y te respondemos con el precio.</p>
+      <div class="builder">
+        <div>
+          <p class="hint">Toca un corte para agregarlo. Vuelve a tocarlo para sumar más, o usa el − para quitar.</p>
+          <div class="groups" id="groups"></div>
+        </div>
+        <aside class="ticket" aria-live="polite">
+          <h3>Tu cotización</h3>
+          <div class="seg" role="radiogroup" aria-label="Tipo de compra">
+            <label><input type="radio" name="tipo" value="mayor" checked><span>Por mayor</span></label>
+            <label><input type="radio" name="tipo" value="detal"><span>Para mi casa</span></label>
+          </div>
+          <ul id="ticketList"><li class="empty">Aún no has elegido cortes.</li></ul>
+          <label class="f" for="nombre">Tu nombre</label>
+          <input id="nombre" type="text" autocomplete="name" placeholder="Ej: Marta Gómez">
+          <div id="negocioBox">
+            <label class="f" for="negocio">Nombre de tu negocio</label>
+            <input id="negocio" type="text" placeholder="Ej: Restaurante El Fogón">
+          </div>
+          <label class="f" for="entrega">¿Cómo recibes?</label>
+          <select id="entrega">
+            <option>Recojo en el local</option>
+            <option>Domicilio (te preguntamos el barrio)</option>
+          </select>
+          <a class="btn mag" id="wa" href="#" target="_blank" rel="noopener" aria-disabled="true">Pedir cotización por WhatsApp</a>
+          <small>Sin compromiso. El precio final lo confirmamos al pesar.</small>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <h2 class="tt" style="color:var(--magenta-deep)">Así de fácil</h2>
+      <p class="sub">Tres pasos y tu pedido queda listo para recoger.</p>
+      <ol class="steps">
+        <li><h3>Elige</h3><p>Marca los cortes y las cantidades que necesitas, en kilos o en libras.</p></li>
+        <li><h3>Cotiza</h3><p>Envía el pedido por WhatsApp. Te respondemos con el precio, mayorista si compras por volumen.</p></li>
+        <li><h3>Recibe</h3><p>Pasa por el Local 086 o pide domicilio. Tu pedido sale cortado y empacado.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block wood" style="border-block:4px solid var(--ink)">
+    <div class="wrap">
+      <h2 class="tt outline" style="-webkit-text-stroke-width:6px">¿Quién nos compra?</h2>
+      <p class="sub" style="color:var(--ink);font-weight:500">Atendemos desde el que lleva dos libras para el almuerzo hasta el que surte un negocio.</p>
+      <ul class="who">
+        <li>Restaurantes</li><li>Asaderos</li><li>Tiendas y minimercados</li><li>Cocinas de eventos</li><li>Parrilladas</li><li>Familias</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer id="contacto">
+  <div class="wrap">
+    <div>
+      <h2>AviCarnes · la veleñita</h2>
+      <p>Plaza de mercado · Bogotá</p>
+      <span class="big">LOCAL 086</span>
+      <p id="horario"></p>
+      <p id="telefono"></p>
+    </div>
+    <a class="btn sun" id="wa2" href="#" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
+  </div>
+</footer>
+
+<script>
+/* Edita aquí: teléfono con indicativo y sin signos (ej. "573001234567") y horario. */
+var CONFIG = { telefono: "573203586550", horario: "", nombre: "AviCarnes La Veleñita (Local 086)" };
+
+function presas(){return [
+  {n:"Pierna pernil", d:"Presa entera, para asar u hornear"},
+  {n:"Muslo", d:"Para freír, hornear o guisar"},
+  {n:"Colombina", d:"Para sudado, brasa y horno"},
+  {n:"Alas", d:"Para fritar, BBQ y picadas"},
+  {n:"Pechuga", d:"Para asar, apanar o desmechar"},
+  {n:"Menudencia", d:"Hígado, molleja y corazón"}];}
+var CATS = {
+ cerdo:{etiqueta:"Cerdo", grupos:[
+  {t:"Pulpa", s:"carne magra", c:[
+    {n:"Lomo", d:"Para asar, medallones o rellenar"},
+    {n:"Pierna", d:"Para asar, desmechar o hacer guiso"},
+    {n:"Milanesa", d:"Cortada delgada para apanar"}]},
+  {t:"Con hueso", s:"parrilla y horno", c:[
+    {n:"Costilla", d:"Para BBQ, horno y parrilla"},
+    {n:"Costilla papada", d:"Más grasosa y jugosa, ideal a la brasa"},
+    {n:"Chuleta", d:"Para plancha y parrilla"}]},
+  {t:"Para la olla", s:"sancochos y frijoles", c:[
+    {n:"Espinazo", d:"Para sancocho y caldos"},
+    {n:"Codos", d:"Para frijoles y lentejas"},
+    {n:"Pezuña", d:"Para frijoles y sopas"},
+    {n:"Colas", d:"Para guisos y frijolada"},
+    {n:"Cabeza entera", d:"Por unidad", u:"und"}]},
+  {t:"Grasa y panza", s:"chicharrón y sazón", c:[
+    {n:"Panceta", d:"Para tocineta y chicharrón"},
+    {n:"Barriga", d:"Para chicharrón y bandeja"},
+    {n:"Tocino", d:"Para sazonar y rendir comidas"},
+    {n:"Empella", d:"Para freír y sazonar"}]}]},
+ res:{etiqueta:"Res", grupos:[
+  {t:"Para asar", s:"parrilla y plancha", c:[
+    {n:"Lomo fino", d:"El más tierno, para medallones y asados"},
+    {n:"Lomo ancho", d:"Para bistec, churrasco y parrilla"},
+    {n:"Punta de anca", d:"Para asar entera o en bife"},
+    {n:"Chata", d:"Para sudado y asado"}]},
+  {t:"Para guiso y sudado", s:"cocción lenta", c:[
+    {n:"Bola", d:"Para guisos, sudados y desmechar"},
+    {n:"Cadera", d:"Para sudado y carne desmechada"},
+    {n:"Murillo", d:"Para sopas y carne desmechada"},
+    {n:"Sobrebarriga", d:"Para sudado, al horno o a la plancha"},
+    {n:"Posta", d:"Para estofado y roast beef"}]},
+  {t:"Con hueso y otros", s:"sopas y sancochos", c:[
+    {n:"Costilla de res", d:"Para sancocho, caldo y parrilla"},
+    {n:"Pecho", d:"Para guisos y carne desmechada"},
+    {n:"Rabo", d:"Para sopas y guisos"},
+    {n:"Carne molida", d:"Para hamburguesas, albóndigas y relleno"}]}],
+  nota:'También manejamos vísceras de res. Escríbenos y te contamos qué hay hoy.'},
+ pollo:{etiqueta:"Pollo", grupos:[
+  {t:"Pollo de granja", s:"todas las presas", c:presas()},
+  {t:"Pollo semicriollo", s:"todas las presas", c:presas()}]}
+};
+var cat = "cerdo", tipo = "mayor", cant = {};
+function fmt(q){return (q%1? q.toFixed(1).replace(".",","): String(q));}
+function unidad(){return tipo==="mayor" ? "kg" : "lb";}
+function waLink(text){return (CONFIG.telefono? "https://wa.me/"+CONFIG.telefono : "https://wa.me/")+"?text="+encodeURIComponent(text);}
+
+var groupsEl = document.getElementById("groups"), outs = [];
+Object.keys(CATS).forEach(function(k){ CATS[k].grupos.forEach(function(g,gi){ g.c.forEach(function(x,ci){ x._key=k+"-"+gi+"-"+ci; }); }); });
+function drawGroups(){
+  groupsEl.innerHTML=""; outs=[];
+  Object.keys(CATS).forEach(function(k){
+    var box=document.createElement("div"); box.className="group";
+    var h=document.createElement("h3"); h.className="c-"+k; h.textContent=CATS[k].etiqueta; box.appendChild(h);
+    CATS[k].grupos.forEach(function(g){
+      var row=document.createElement("div"); row.className="row";
+      var lab=document.createElement("span"); lab.className="lab"; lab.textContent=g.t; row.appendChild(lab);
+      var chips=document.createElement("div"); chips.className="chips";
+      g.c.forEach(function(x){
+        var key=x._key, step=x.u?1:(tipo==="mayor"?1:0.5);
+        var chip=document.createElement("span"); chip.className="chip";
+        var add=document.createElement("button"); add.type="button"; add.className="add"; add.title=x.d;
+        var nm=document.createElement("span"); nm.textContent=x.n;
+        var q=document.createElement("span"); q.className="q";
+        add.appendChild(nm); add.appendChild(q);
+        var minus=document.createElement("button"); minus.type="button"; minus.className="minus"; minus.textContent="−"; minus.setAttribute("aria-label","Quitar "+x.n);
+        chip.appendChild(add); chip.appendChild(minus);
+        function paint(){ var v=cant[key]||0; q.textContent = v? fmt(v)+" "+(x.u||unidad()) : ""; chip.classList.toggle("on",!!v); }
+        outs.push(paint); paint();
+        function set(v){ cant[key]=Math.max(0,Math.round(v*2)/2); paint(); render(); }
+        function st(){return x.u?1:(tipo==="mayor"?1:0.5);}
+        add.onclick=function(){set((cant[key]||0)+st());};
+        minus.onclick=function(){set((cant[key]||0)-st());};
+        chips.appendChild(chip);
+      });
+      row.appendChild(chips); box.appendChild(row);
+    });
+    if(CATS[k].nota){
+      var n=document.createElement("div"); n.className="row"; n.style.display="block";
+      var a=document.createElement("a"); a.href=waLink("Hola "+CONFIG.nombre+", quiero consultar qué vísceras de res tienen hoy."); a.target="_blank"; a.rel="noopener"; a.style.cssText="color:var(--magenta-deep);font-weight:700";
+      a.textContent="Preguntar por WhatsApp";
+      n.appendChild(document.createTextNode(CATS[k].nota+" ")); n.appendChild(a); box.appendChild(n);
+    }
+    groupsEl.appendChild(box);
+  });
+}
+
+var nombre=document.getElementById("nombre"), negocio=document.getElementById("negocio"), entrega=document.getElementById("entrega");
+function render(){
+  var ul=document.getElementById("ticketList"), lines=[]; ul.innerHTML="";
+  Object.keys(CATS).forEach(function(k){ CATS[k].grupos.forEach(function(g){ g.c.forEach(function(x){
+    var q=cant[x._key]||0; if(!q) return;
+    var nom = CATS[k].etiqueta+" · "+(k==="pollo"? g.t.replace("Pollo ","")+" · ":"")+x.n;
+    var txt = fmt(q)+" "+(x.u||unidad())+" "+nom;
+    var li=document.createElement("li"); li.textContent=txt; ul.appendChild(li); lines.push("- "+txt);
+  });});});
+  if(!lines.length){var e=document.createElement("li");e.className="empty";e.textContent="Aún no has elegido cortes.";ul.appendChild(e);}
+  var wa=document.getElementById("wa");
+  if(lines.length){
+    var msg="Hola "+CONFIG.nombre+", quiero una cotización "+(tipo==="mayor"?"por mayor":"para mi casa")+":\n"+lines.join("\n")+
+      (nombre.value.trim()?"\nNombre: "+nombre.value.trim():"")+
+      (tipo==="mayor"&&negocio.value.trim()?"\nNegocio: "+negocio.value.trim():"")+
+      "\nEntrega: "+entrega.value;
+    wa.href=waLink(msg); wa.setAttribute("aria-disabled","false");
+  } else { wa.href="#"; wa.setAttribute("aria-disabled","true"); }
+}
+function setTipo(t){
+  tipo=t;
+  document.querySelectorAll('input[name=tipo]').forEach(function(r){r.checked=(r.value===t);});
+  document.getElementById("negocioBox").hidden=(t!=="mayor");
+  outs.forEach(function(p){p();}); render();
+}
+document.querySelectorAll('input[name=tipo]').forEach(function(r){r.addEventListener("change",function(){setTipo(r.value);});});
+document.querySelectorAll("[data-tipo]").forEach(function(a){a.addEventListener("click",function(){setTipo(a.getAttribute("data-tipo"));});});
+[nombre,negocio,entrega].forEach(function(el){el.addEventListener("input",render);});
+
+var hi = waLink("Hola "+CONFIG.nombre+", quiero hacer una consulta.");
+document.getElementById("waTop").href=hi; document.getElementById("wa2").href=hi;
+if(CONFIG.horario) document.getElementById("horario").textContent="Horario: "+CONFIG.horario;
+if(CONFIG.telefono) document.getElementById("telefono").textContent="WhatsApp: +"+CONFIG.telefono;
+drawGroups(); setTipo("mayor");
+</script>
+</body>
+</html>
