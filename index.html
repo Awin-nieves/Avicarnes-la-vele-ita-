@@ -41,15 +41,16 @@ h1,h2,h3{font-family:var(--font-display);font-weight:400;text-wrap:balance;line-
   repeating-linear-gradient(88deg,rgba(255,235,190,.16) 0 3px,transparent 3px 17px),
   linear-gradient(180deg,#D9AC6C,#C48F4E)}
 
-header.top{border-bottom:4px solid var(--ink)}
+header.top{border-bottom:4px solid var(--ink);background:var(--cream)}
+.logo{display:block;height:68px;width:auto;max-width:100%;border:3px solid var(--ink);border-radius:8px;box-shadow:3px 3px 0 var(--magenta)}
 .bar{display:flex;align-items:center;gap:16px;padding:12px 0;flex-wrap:wrap}
-.mark{display:flex;align-items:baseline;gap:10px;text-decoration:none}
+.mark{display:block;text-decoration:none}
 .mark b{font:400 30px/1 var(--font-display);}
 .mark span{font:400 22px/1 var(--font-script);color:var(--magenta-deep);background:rgba(255,255,255,.85);padding:3px 10px;border-radius:999px;border:2px solid var(--magenta)}
 .local{margin-left:auto;display:flex;align-items:center;gap:10px}
 .local .tag{background:var(--ink);color:#fff;font:400 18px/1 var(--font-display);padding:8px 12px;border-radius:8px;letter-spacing:.04em}
 .local a.btn{padding:11px 18px;font-size:15px;box-shadow:0 4px 0 var(--ink)}
-@media (max-width:640px){.local .tag{display:none}.local{width:100%}.local a.btn{width:100%}.mark b{font-size:26px}}
+@media (max-width:640px){.local{width:100%;margin-left:0}.local a.btn{width:100%}.logo{height:auto;width:100%}.mark{width:100%}}
 
 /* Hero */
 .hero{padding:44px 0 64px;position:relative}
@@ -166,14 +167,12 @@ footer .btn{box-shadow:0 5px 0 #000}
 </head>
 <body>
 
-<header class="top wood">
+<header class="top">
   <div class="wrap bar">
     <a class="mark" href="#inicio" aria-label="AviCarnes La Veleñita, inicio">
-      <b class="outline" style="-webkit-text-stroke-width:5px;text-shadow:0 3px 0 var(--magenta-deep)">AVICARNES</b>
-      <span>la veleñita</span>
+      <img class="logo" src="logo.jpg" width="1286" height="316" alt="AviCarnes la veleñita, Local 086, carnes de res, cerdo y pollo">
     </a>
     <div class="local">
-      <span class="tag">LOCAL 086</span>
       <a class="btn sun" id="waTop" href="#" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
     </div>
   </div>
