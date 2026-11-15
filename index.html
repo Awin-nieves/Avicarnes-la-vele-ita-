@@ -41,6 +41,8 @@ h1,h2,h3{font-family:var(--font-display);font-weight:400;text-wrap:balance;line-
   repeating-linear-gradient(88deg,rgba(255,235,190,.16) 0 3px,transparent 3px 17px),
   linear-gradient(180deg,#D9AC6C,#C48F4E)}
 
+.promo{background:var(--magenta);color:#fff;text-align:center;font:500 16px/1.35 var(--font-body);padding:10px 16px;border-bottom:4px solid var(--ink)}
+.promo strong{color:var(--sun);font-weight:700}
 header.top{border-bottom:4px solid var(--ink);background:var(--cream)}
 .logo{display:block;height:68px;width:auto;max-width:100%;border:3px solid var(--ink);border-radius:8px;box-shadow:3px 3px 0 var(--magenta)}
 .bar{display:flex;align-items:center;gap:16px;padding:12px 0;flex-wrap:wrap}
@@ -167,6 +169,10 @@ footer .btn{box-shadow:0 5px 0 #000}
 </head>
 <body>
 
+<div class="promo" id="promo" role="note">
+  <strong>Martes 17 de noviembre</strong> · desde las 5:00 p. m. · <strong>domicilio GRATIS</strong> en compras superiores a $200.000
+</div>
+
 <header class="top">
   <div class="wrap bar">
     <a class="mark" href="#inicio" aria-label="AviCarnes La Veleñita, inicio">
@@ -239,6 +245,7 @@ footer .btn{box-shadow:0 5px 0 #000}
             <option>Domicilio (te preguntamos el barrio)</option>
           </select>
           <a class="btn mag" id="wa" href="#" target="_blank" rel="noopener" aria-disabled="true">Pedir cotización por WhatsApp</a>
+          <small id="promoNota"><strong>Martes 17, desde las 5:00 p. m.:</strong> domicilio gratis en compras superiores a $200.000.</small>
           <small>Sin compromiso. El precio final lo confirmamos al pesar.</small>
         </aside>
       </div>
@@ -417,6 +424,10 @@ document.getElementById("waTop").href=hi; document.getElementById("wa2").href=hi
 if(CONFIG.horario) document.getElementById("horario").textContent="Horario: "+CONFIG.horario;
 if(CONFIG.telefono) document.getElementById("telefono").textContent="WhatsApp: +"+CONFIG.telefono;
 drawGroups(); setTipo("mayor");
+/* La promoción se oculta sola después del martes 17 de noviembre de 2026 (hora de Bogotá). */
+if (Date.now() >= Date.parse("2026-11-18T00:00:00-05:00")) {
+  ["promo","promoNota"].forEach(function(id){ var e=document.getElementById(id); if(e) e.hidden=true; });
+}
 </script>
 </body>
 </html>
